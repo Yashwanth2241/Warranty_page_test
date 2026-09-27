@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2862df">
+  <title>Warranty registration | BLUNEURON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: "DM Sans", "Segoe UI", sans-serif;
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      --blue: #2862df;
+      --blue-dark: #1f4fc4;
+      --ink: #142b3c;
+      --muted: #697e8e;
+      --line: #d4e0e8;
+      --pale: #eaf5fb;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: minmax(390px, 46%) 1fr;
+      min-height: 100vh;
+    }
+
+    .brand-panel {
+      position: relative;
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      padding: 42px clamp(40px, 5vw, 96px) 36px;
+      color: white;
+      background: var(--blue);
+      isolation: isolate;
+    }
+
+    .brand-panel::before,
+    .brand-panel::after {
+      position: absolute;
+      z-index: -1;
+      content: "";
+      aspect-ratio: 1;
+      border: 1px solid rgb(255 255 255 / 12%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .brand-panel::before {
+      top: 34%;
+      left: 62%;
+      width: min(52vw, 690px);
+      box-shadow: 0 0 0 38px rgb(255 255 255 / 3%), 0 0 0 86px rgb(255 255 255 / 2%);
+    }
+
+    .brand-panel::after {
+      top: 34%;
+      left: 65%;
+      width: min(40vw, 530px);
+      background: rgb(255 255 255 / 2%);
+    }
+
+    .wordmark {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--blue-dark);
+      background: #a9d7ec;
+    }
+
+    .brand-copy {
+      position: relative;
+      z-index: 1;
+      max-width: 430px;
+      margin-block: auto;
+      padding-block: 50px;
+      animation: arrive 550ms ease-out both;
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      color: #bce7fa;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 410px;
+      margin: 0;
+      font-size: clamp(42px, 4vw, 62px);
+      font-weight: 600;
+      line-height: 1.08;
+    }
+
+    .brand-description {
+      max-width: 330px;
+      margin: 25px 0 0;
+      color: #d1e6f1;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .brand-footer {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 clamp(36px, 7vh, 72px);
+      transform: translateY(-48px);
+      color: #c3dfec;
+      font-size: 13px;
+    }
+
+    .form-panel {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 72px clamp(32px, 7vw, 120px);
+    }
+
+    .form-content {
+      width: min(100%, 440px);
+      animation: arrive 550ms 80ms ease-out both;
+    }
+
+    .form-heading { margin-bottom: 38px; }
+
+    h2 {
+      margin: 0;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .form-intro {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .field { margin-bottom: 26px; }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      color: #183347;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .required { color: #bd4e45; }
+
+    input {
+      width: 100%;
+      height: 56px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      outline: none;
+      color: var(--ink);
+      background: white;
+      font: inherit;
+      font-size: 15px;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    input::placeholder { color: #94a6b1; opacity: 1; }
+
+    input:focus {
+      border-color: #438db5;
+      box-shadow: 0 0 0 3px rgb(67 141 181 / 15%);
+    }
+
+    input[aria-invalid="true"] { border-color: #bd4e45; }
+
+    .field-error {
+      margin: 7px 0 0;
+      color: #a43f38;
+      font-size: 12px;
+    }
+
+    .submit-button {
+      display: flex;
+      width: 100%;
+      min-height: 56px;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2px;
+      border: 0;
+      border-radius: 6px;
+      color: white;
+      background: var(--blue);
+      cursor: pointer;
+      font: inherit;
+      font-size: 15px;
+      font-weight: 700;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+
+    .submit-button:hover { background: var(--blue-dark); }
+    .submit-button:active { transform: translateY(1px); }
+    .submit-button:focus-visible { outline: 3px solid #7dc0e1; outline-offset: 3px; }
+
+    .privacy-note {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .save-status {
+      min-height: 18px;
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .save-status[data-state="saved"],
+    .save-status[data-state="error"] {
+      padding: 12px 14px;
+      border: 1px solid;
+      border-radius: 6px;
+      font-size: 13px;
+    }
+
+    .save-status[data-state="error"] {
+      border-color: #e8c4c0;
+      color: #a43f38;
+      background: #fff5f3;
+    }
+
+    .success-message {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border: 1px solid #c4e1f0;
+      border-radius: 6px;
+      color: #174d6b;
+      background: var(--pale);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .success-message[hidden] { display: none; }
+
+    @keyframes arrive {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 760px) {
+      .page { grid-template-columns: 1fr; }
+
+      .brand-panel {
+        min-height: auto;
+        padding: 24px 26px 30px;
+      }
+
+      .brand-panel::before { top: 4%; left: 64%; width: 320px; }
+      .brand-panel::after { top: 8%; left: 69%; width: 240px; }
+      .brand-copy { padding: 28px 0 0; }
+      .eyebrow { margin-bottom: 12px; }
+      h1 { max-width: 370px; font-size: 40px; }
+      .brand-description { max-width: 380px; margin-top: 12px; font-size: 14px; line-height: 1.55; }
+      .brand-footer { display: none; }
+      .form-panel { align-items: flex-start; padding: 38px 26px 48px; }
+      .form-content { max-width: 480px; margin-inline: auto; }
+      .form-heading { margin-bottom: 28px; }
+      h2 { font-size: 25px; }
+      .field { margin-bottom: 21px; }
+    }
+
+    @media (min-width: 761px) {
+      .brand-panel {
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: 100vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <aside class="brand-panel" aria-label="BLUNEURON warranty registration">
+      <a class="wordmark" href="#" aria-label="BLUNEURON home">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 3.5 19 6v5.6c0 4.3-2.9 7.4-7 9.1-4.1-1.7-7-4.8-7-9.1V6l7-2.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="m9 12 2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span>BLUNEURON</span>
+      </a>
+
+      <div class="brand-copy">
+        <p class="eyebrow">Warranty registration</p>
+        <h1>A little care goes a long way.</h1>
+        <p class="brand-description">Register your purchase to keep your product’s warranty details in one place.</p>
+      </div>
+
+      <p class="brand-footer">Your product, looked after.</p>
+    </aside>
+
+    <section class="form-panel" aria-labelledby="form-title">
+      <div class="form-content">
+        <header class="form-heading">
+          <h2 id="form-title">Your purchase details</h2>
+          <p class="form-intro">Enter the details exactly as they appear on your invoice.</p>
+        </header>
+
+        <form id="warranty-form" novalidate>
+          <div class="field">
+            <label for="full-name">Full name <span class="required" aria-hidden="true">*</span></label>
+            <input id="full-name" name="fullName" type="text" placeholder="e.g. Alex Morgan" autocomplete="name" required minlength="2">
+            <p class="field-error" id="name-error" hidden>Please enter your full name.</p>
+          </div>
+
+          <div class="field">
+            <label for="phone-number">Phone number <span class="required" aria-hidden="true">*</span></label>
+            <input id="phone-number" name="phoneNumber" type="tel" placeholder="e.g. +91 98765 43210" autocomplete="tel" inputmode="tel" required aria-describedby="phone-error">
+            <p class="field-error" id="phone-error" hidden>Enter a valid phone number with 7 to 15 digits.</p>
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="e.g. alex@example.com" autocomplete="email" aria-describedby="email-error">
+            <p class="field-error" id="email-error" hidden>Enter a valid email address.</p>
+          </div>
+
+          <div class="field">
+            <label for="purchase-date">Purchase date <span class="required" aria-hidden="true">*</span></label>
+            <input id="purchase-date" name="purchaseDate" type="date" autocomplete="off" required aria-describedby="date-error">
+            <p class="field-error" id="date-error" hidden>Choose a valid purchase date that is not in the future.</p>
+          </div>
+
+          <div class="field">
+            <label for="invoice-number">Invoice number <span class="required" aria-hidden="true">*</span></label>
+            <input id="invoice-number" name="invoiceNumber" type="text" placeholder="e.g. INV-20481" autocomplete="off" required>
+            <p class="field-error" id="invoice-error" hidden>Please enter your invoice number.</p>
+          </div>
+
+          <button class="submit-button" type="submit">
+            <span>Register warranty</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <p class="save-status" id="save-status" role="status" aria-live="polite"></p>
+          <p class="success-message" id="success-message" role="status" hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const form = document.querySelector("#warranty-form");
+    const nameInput = document.querySelector("#full-name");
+    const phoneInput = document.querySelector("#phone-number");
+    const emailInput = document.querySelector("#email");
+    const dateInput = document.querySelector("#purchase-date");
+    const invoiceInput = document.querySelector("#invoice-number");
+    const successMessage = document.querySelector("#success-message");
+    const saveStatus = document.querySelector("#save-status");
+    const storageKey = "bluneuron-warranty-draft";
+    const draftVersion = 2;
+    const idPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    let storedDraft = null;
+    try {
+      storedDraft = JSON.parse(sessionStorage.getItem(storageKey) || "null");
+    } catch {
+      sessionStorage.removeItem(storageKey);
+    }
+    let registrationId = storedDraft?.version === draftVersion && idPattern.test(storedDraft?.registrationId || "")
+      ? storedDraft.registrationId
+      : crypto.randomUUID();
+    let revision = storedDraft?.version === draftVersion && Number.isSafeInteger(storedDraft?.revision) ? storedDraft.revision : 0;
+
+    if (storedDraft?.values) {
+      nameInput.value = storedDraft.values.fullName || "";
+      phoneInput.value = storedDraft.values.phoneNumber || "";
+      emailInput.value = storedDraft.values.email || "";
+      dateInput.value = toDateInputValue(storedDraft.values.purchaseDate || "");
+      invoiceInput.value = storedDraft.values.invoiceNumber || "";
+    }
+
+    const fields = [
+      { input: nameInput, error: document.querySelector("#name-error"), valid: value => value.trim().length >= 2 },
+      { input: phoneInput, error: document.querySelector("#phone-error"), valid: value => {
+        const digits = value.replace(/\D/g, "");
+        return /^[+\d][\d\s().-]*$/.test(value.trim()) && digits.length >= 7 && digits.length <= 15;
+      } },
+      { input: emailInput, error: document.querySelector("#email-error"), valid: value => !value.trim() || emailInput.validity.valid },
+      { input: dateInput, error: document.querySelector("#date-error"), valid: isValidDate },
+      { input: invoiceInput, error: document.querySelector("#invoice-error"), valid: value => value.trim().length > 0 }
+    ];
+
+    function isValidDate(value) {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+      if (!match) return false;
+
+      const [, yearText, monthText, dayText] = match;
+      const year = Number(yearText);
+      const month = Number(monthText);
+      const day = Number(dayText);
+      const date = new Date(Date.UTC(year, month - 1, day));
+      const isRealDate = date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+      const today = new Date();
+      const todayValue = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+      return isRealDate && value <= todayValue;
+    }
+
+    function toDateInputValue(value) {
+      const legacyDate = /^(\d{2})-(\d{2})-(\d{4})$/.exec(value);
+      if (legacyDate) return `${legacyDate[3]}-${legacyDate[2]}-${legacyDate[1]}`;
+      return value;
+    }
+
+    function getValues() {
+      return {
+        fullName: nameInput.value,
+        phoneNumber: phoneInput.value,
+        email: emailInput.value,
+        purchaseDate: dateInput.value,
+        invoiceNumber: invoiceInput.value
+      };
+    }
+
+    function persistDraft() {
+      sessionStorage.setItem(storageKey, JSON.stringify({
+        version: draftVersion,
+        registrationId,
+        revision,
+        values: getValues()
+      }));
+    }
+
+    async function saveDraft(saveRevision) {
+      try {
+        const response = await fetch("/api/registration", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            registrationId,
+            revision: saveRevision,
+            ...getValues()
+          })
+        });
+        if (!response.ok) throw new Error("Save failed");
+        saveStatus.textContent = "";
+        delete saveStatus.dataset.state;
+        return true;
+      } catch {
+        saveStatus.textContent = "Could not save your registration. Check the server setup and try again.";
+        saveStatus.dataset.state = "error";
+        saveStatus.scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+      }
+    }
+
+    fields.forEach(({ input, error }) => {
+      input.addEventListener("input", () => {
+        input.removeAttribute("aria-invalid");
+        error.hidden = true;
+        successMessage.hidden = true;
+        saveStatus.textContent = "";
+        delete saveStatus.dataset.state;
+        revision += 1;
+        persistDraft();
+      });
+    });
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+      successMessage.hidden = true;
+
+      let firstInvalid = null;
+      fields.forEach(({ input, error, valid }) => {
+        const isFieldValid = valid(input.value);
+        input.setAttribute("aria-invalid", String(!isFieldValid));
+        error.hidden = isFieldValid;
+        if (!isFieldValid && !firstInvalid) firstInvalid = input;
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
+        return;
+      }
+
+      const saved = await saveDraft(revision);
+      if (!saved) return;
+
+      const firstName = nameInput.value.trim().split(/\s+/)[0];
+      successMessage.textContent = `Thanks, ${firstName}. Your warranty details have been saved successfully`;
+      successMessage.hidden = false;
+      successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+      form.reset();
+      fields.forEach(({ input, error }) => {
+        input.removeAttribute("aria-invalid");
+        error.hidden = true;
+      });
+      registrationId = crypto.randomUUID();
+      revision = 0;
+      sessionStorage.removeItem(storageKey);
+    });
+  </script>
+</body>
+</html>

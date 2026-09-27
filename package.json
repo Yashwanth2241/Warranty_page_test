@@ -1,0 +1,18 @@
+{
+  "name": "bluneuron-warranty-registration",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Warranty registration form with Google Sheets draft syncing",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0"
+  }
+}
